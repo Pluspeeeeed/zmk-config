@@ -1,0 +1,12 @@
+/*
+ * vf-adapt.h
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ * AdaptiveKey behaviors
+ * (send a different behavior based on prior key)
+ *
+ * these are dependant on the underlying alpha layout
+ *
+ * using urob's behavior-adaptive-key module (https://github.com/urob/zmk-adaptive-key/)
+ */
