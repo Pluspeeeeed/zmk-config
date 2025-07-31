@@ -40,13 +40,13 @@
 //                           ╭─────────────────────╮ ╭──────────────────────╮
 //                     CPSL  │  X   W   M   G   J  │ │  #$  .:  /*  "<  '>  │
 //                     TAB   │  S   C   N   T   K  | |  ,;   A   E   I   H  │ Z
-//                     CTRL  │  F   P   L   D   V  │ │  -+   U   O   Y   B  │ J
+//                     CTRL  │  F   P   L   D   V  │ │  -+   U   O   Y   B  │ Q
 //                           ╰──────────╮  BSP  R  │ │  SPC RET  ╭──────────╯
 //                                      ╰──────────╯ ╰───────────╯
  &kp ESC   &kp N9 &kp N3 &kp N1   &kp N5   &kp N7                       &kp N6 &kp N2   &kp N0    &kp N4  &kp N8   &kp BACKSPACE
                              &kp LCAPS     HD_LT                        HD_RT   &kp EQUAL
                              &kp TAB       HD_LM                        HD_RM   &kp Z
-                             &kp RCTRL     HD_LB    _______  _______    HD_RB   &kp J
+                             &kp RCTRL     HD_LB    _______  _______    HD_RB   &kp Q
                              &kp LGUI      HD_LH    _______  _______    HD_RH   &tog l_num
                 >;
             };
