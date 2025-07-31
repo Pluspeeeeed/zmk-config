@@ -14,7 +14,7 @@
 
 #include "layers_def.h" // layer def common core (3x5+2)
 
-{
+
     keymap {
         compatible = "zmk,keymap";
             l_alpha {
@@ -80,4 +80,4 @@
                              _______    l_nav_LH    _______  _______    l_nav_RH    _______
                 >;
             };
-};
+    };
