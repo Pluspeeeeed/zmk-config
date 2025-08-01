@@ -14,10 +14,10 @@
 #define HD_combo_file "handsdown/vf-combos.dtsi" // the related combo file
 
 #define HD_Layer_label "HD-Vf"
-#define HD_LT &kp X           &kp W           &kp M           &kp G                   &kp J
-#define HD_LM &mt RCTRL S     &mt RALT C      &mt RGUI N      &mt RSHFT T             &kp K
-#define HD_LB &kp F           &kp P           &kp L           &kp D                   &kp V
-#define HD_LH                                                 &lt l_fun BACKSPACE     &lt l_nav R
+#define HD_LT &ak_X           &ak_W           &ak_M           &ak_G           &ak_J
+#define HD_LM &mt_S RCTRL S   &mt_C RALT C    &mt_N RGUI N    &mt_T RSHFT T   &ak_K
+#define HD_LB &ak_F           &ak_P           &ak_L           &ak_D           &ak_V
+#define HD_LH                                                 &lt_BspcDel     &lt_R l_nav R
 
 #define HD_RT &kp HASH       &kp DOT         &kp FSLH        &kp DQT         &kp SQT
 #define HD_RM &kp COMMA      &mt LSHFT A     &mt LGUI E      &mt LALT I      &mt LCTRL H
