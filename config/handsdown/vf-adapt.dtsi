@@ -10,7 +10,7 @@
  *
  * using urob's behavior-adaptive-key module (https://github.com/urob/zmk-adaptive-key/)
  */
- 
+
         ak_A: ak_A {
             compatible = "zmk,behavior-adaptive-key";
             #binding-cells = <0>;
