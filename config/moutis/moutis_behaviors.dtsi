@@ -237,6 +237,7 @@
         };
 
 /* Comma Magic */
+/*
 #define CommaMagic CmmaMgc CAPSLOCK 0   // simple macro to keep the keymap uncluttered
 
         CmmaSemi: CmmaSemi { // press = COMMA,shift = Semicolon
@@ -256,7 +257,7 @@
             my_lk_config;
             bindings = <&kp>, <&CmmaSemi>;
         };
-
+*/
 /*
  * lk_ linger key behaviors (approximated via hold-tap)
  * most require a combo to execute the multiple key taps
