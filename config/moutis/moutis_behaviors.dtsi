@@ -116,6 +116,12 @@
  * modmorph behaviors
  * identified by the camel case of each of the keycodes
  */
+        CmmaSemi: CmmaSemi { // press = COMMA,shift = Semicolon
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&ak_CMMA>, <&kp SEMI>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
         DotColn: DotColn {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -206,7 +212,15 @@
             bindings = <&lt l_fun BACKSPACE>, <&kp DELETE>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+        ak_CMMA: ak_CMMA { // double-tap comma = caps_word
+            compatible = "zmk,behavior-adaptive-key";
+            #binding-cells = <0>;
+            bindings = <&kp COMMA>;
+            // Change POST_KERNEL to match or exceed caps_word
+            zephyr,priority = <22>;
 
+            ak_CMMA_cap { trigger-keys = <COMMA>; max-prior-idle-ms = <my_ak_term>; bindings = <&kp BSPC  &caps_word>; };
+        };
         ak_DOT: ak_DOT {
             compatible = "zmk,behavior-adaptive-key";
             #binding-cells = <0>;
