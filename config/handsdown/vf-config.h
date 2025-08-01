@@ -27,12 +27,12 @@
 // Japanese "mode" (no adaptives, & L, C, X not used so repurpose to ん, Z, -)
 #define JP_Layer_label "HD-JP"
 #define JP_LT &kp MINUS       &kp W           &kp M           &kp G           &kp J
-#define JP_LM &mt RCTRL S     &mt RALT Z      &mt RGUI N      &mt RSHFT T     &kp K
-#define JP_LB &kp F           &kp P           _______           &kp D           &kp V
+#define JP_LM &hml RCTRL S    &hml RALT Z     &hml RGUI N     &hml RSHFT T    &kp K
+#define JP_LB &kp F           &kp P           &t_nn           &kp D           &kp V
 #define JP_LH                                                 _______         &lt l_nav R
 
-#define JP_RT _______        _______      _______      &kp LBKT        &kp RBKT
-#define JP_RM _______         &mt LSHFT A    &mt LGUI E     &mt LALT I     &mt LCTRL H
+#define JP_RT _______         &DotColnJ       &SlshStarJ      &kp LBKT        &kp RBKT
+#define JP_RM _______         &hmr LSHFT A    &hmr LGUI E     &hmr LALT I     &hmr LCTRL H
 #define JP_RB _______         &kp U           &kp O           &kp Y           &kp B
 #define JP_RH _______         _______
 
