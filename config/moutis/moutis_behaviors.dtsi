@@ -225,12 +225,12 @@
 /* Comma Magic */
 #define CommaMagic CmmaMgc CAPSLOCK 0   // simple macro to keep the keymap uncluttered
 
-        CmmaSemi: CmmaSemi { // press = COMMA,shift = Semicolon
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&ak_CMMA>, <&kp SEMI>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
+//        CmmaSemi: CmmaSemi { // press = COMMA,shift = Semicolon
+//            compatible = "zmk,behavior-mod-morph";
+//            #binding-cells = <0>;
+//            bindings = <&ak_CMMA>, <&kp SEMI>;
+//            mods = <(MOD_LSFT|MOD_RSFT)>;
+//        };
 //        ak_CMMA: ak_CMMA { // double-tap comma = caps_word
 //            compatible = "zmk,behavior-adaptive-key";
 //            #binding-cells = <0>;
