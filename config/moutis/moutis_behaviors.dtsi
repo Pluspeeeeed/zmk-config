@@ -231,13 +231,13 @@
             bindings = <&ak_CMMA>, <&kp SEMI>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        ak_CMMA: ak_CMMA { // double-tap comma = caps_word
-            compatible = "zmk,behavior-adaptive-key";
-            #binding-cells = <0>;
-            bindings = <&kp COMMA>;
-
-            ak_CMMA_cap { trigger-keys = <COMMA>; max-prior-idle-ms = <my_ak_term>; bindings = <&kp BSPC  &caps_word>; };
-        };
+//        ak_CMMA: ak_CMMA { // double-tap comma = caps_word
+//            compatible = "zmk,behavior-adaptive-key";
+//            #binding-cells = <0>;
+//            bindings = <&kp COMMA>;
+//
+//            ak_CMMA_cap { trigger-keys = <COMMA>; max-prior-idle-ms = <my_ak_term>; bindings = <&kp BSPC  &caps_word>; };
+//        };
         CmmaMgc: CmmaMgc {              // Hold for CAPSLOCK, tap for COMMA
             my_lk_config;
             bindings = <&kp>, <&CmmaSemi>;
