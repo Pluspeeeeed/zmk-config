@@ -119,7 +119,7 @@
         CmmaSemi: CmmaSemi { // press = COMMA,shift = Semicolon
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&ak_CMMA>, <&kp SEMI>;
+            bindings = <&kp CMMA>, <&kp SEMI>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
         DotColn: DotColn {
@@ -212,15 +212,14 @@
             bindings = <&lt l_fun BACKSPACE>, <&kp DELETE>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+        /*
         ak_CMMA: ak_CMMA { // double-tap comma = caps_word
             compatible = "zmk,behavior-adaptive-key";
             #binding-cells = <0>;
             bindings = <&kp COMMA>;
-            // Change POST_KERNEL to match or exceed caps_word
-            zephyr,priority = <22>;
-
             ak_CMMA_cap { trigger-keys = <COMMA>; max-prior-idle-ms = <my_ak_term>; bindings = <&kp BSPC  &caps_word>; };
         };
+        */
         ak_DOT: ak_DOT {
             compatible = "zmk,behavior-adaptive-key";
             #binding-cells = <0>;
@@ -237,27 +236,26 @@
         };
 
 /* Comma Magic */
-/*
 #define CommaMagic CmmaMgc CAPSLOCK 0   // simple macro to keep the keymap uncluttered
 
-        CmmaSemi: CmmaSemi { // press = COMMA,shift = Semicolon
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&ak_CMMA>, <&kp SEMI>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-        ak_CMMA: ak_CMMA { // double-tap comma = caps_word
-            compatible = "zmk,behavior-adaptive-key";
-            #binding-cells = <0>;
-            bindings = <&kp COMMA>;
+//        CmmaSemi: CmmaSemi { // press = COMMA,shift = Semicolon
+//            compatible = "zmk,behavior-mod-morph";
+//            #binding-cells = <0>;
+//            bindings = <&ak_CMMA>, <&kp SEMI>;
+//            mods = <(MOD_LSFT|MOD_RSFT)>;
+//        };
+//        ak_CMMA: ak_CMMA { // double-tap comma = caps_word
+//            compatible = "zmk,behavior-adaptive-key";
+//            #binding-cells = <0>;
+//            bindings = <&kp COMMA>;
+//
+//            ak_CMMA_cap { trigger-keys = <COMMA>; max-prior-idle-ms = <my_ak_term>; bindings = <&kp BSPC  &caps_word>; };
+//        };
+//        CmmaMgc: CmmaMgc {              // Hold for CAPSLOCK, tap for COMMA
+//            my_lk_config;
+//            bindings = <&kp>, <&CmmaSemi>;
+//        };
 
-            ak_CMMA_cap { trigger-keys = <COMMA>; max-prior-idle-ms = <my_ak_term>; bindings = <&kp BSPC  &caps_word>; };
-        };
-        CmmaMgc: CmmaMgc {              // Hold for CAPSLOCK, tap for COMMA
-            my_lk_config;
-            bindings = <&kp>, <&CmmaSemi>;
-        };
-*/
 /*
  * lk_ linger key behaviors (approximated via hold-tap)
  * most require a combo to execute the multiple key taps
