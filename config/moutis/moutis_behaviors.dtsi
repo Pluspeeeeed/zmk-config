@@ -71,10 +71,10 @@
             bindings = <&kp>, <&ak_S>;
             hold-trigger-key-positions = <KEYS_R THUMBS>; // right hand allowed
         };
-        mt_C: mt_C {
+        mt_C: mt_C {  // C is on RIGHT hand in Pm, so it has no restriction
             my_hrm_config;
             bindings = <&kp>, <&ak_C>;
-            hold-trigger-key-positions = <KEYS_R THUMBS>; // right hand allowed
+//            hold-trigger-key-positions = <KEYS_R THUMBS>; // right hand allowed
         };
         mt_N: mt_N {
             my_hrm_config;
@@ -239,20 +239,20 @@
         CmmaSemi: CmmaSemi { // press = COMMA,shift = Semicolon
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp CMMA>, <&kp N0>;
+            bindings = <&ak_CMMA>, <&kp SEMI>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-//        ak_CMMA: ak_CMMA { // double-tap comma = caps_word
-//            compatible = "zmk,behavior-adaptive-key";
-//            #binding-cells = <0>;
-//            bindings = <&kp COMMA>;
-//
-//            ak_CMMA_cap { trigger-keys = <COMMA>; max-prior-idle-ms = <my_ak_term>; bindings = <&kp BSPC  &caps_word>; };
-//        };
-//        CmmaMgc: CmmaMgc {              // Hold for CAPSLOCK, tap for COMMA
-//            my_lk_config;
-//            bindings = <&kp>, <&CmmaSemi>;
-//        };
+        ak_CMMA: ak_CMMA { // double-tap comma = caps_word
+            compatible = "zmk,behavior-adaptive-key";
+            #binding-cells = <0>;
+            bindings = <&kp COMMA>;
+
+            ak_CMMA_cap { trigger-keys = <COMMA>; max-prior-idle-ms = <my_ak_term>; bindings = <&kp BSPC  &caps_word>; };
+        };
+        CmmaMgc: CmmaMgc {              // Hold for CAPSLOCK, tap for COMMA
+            my_lk_config;
+            bindings = <&kp>, <&CmmaSemi>;
+        };
 
 /*
  * lk_ linger key behaviors (approximated via hold-tap)
