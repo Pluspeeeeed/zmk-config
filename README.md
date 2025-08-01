@@ -9,3 +9,5 @@
 ╰──────╮  App BSP SPC │ │  R  RET nLk   ╭─────╯
        ╰──────────────╯ ╰───────────────╯
 ```
+todo: 
+configure number row
