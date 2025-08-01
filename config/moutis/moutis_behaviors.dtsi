@@ -129,7 +129,7 @@
         DotColn: DotColn {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp DOT>, <&kp COLON>;
+            bindings = <&ak_DOT>, <&kp COLON>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
         DotColnJ: DotColnJ { // no adaptive Japanese
@@ -239,7 +239,7 @@
         CmmaSemi: CmmaSemi { // press = COMMA,shift = Semicolon
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp CMMA>, <&kp SEMI>;
+            bindings = <&kp CMMA>, <&kp N0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 //        ak_CMMA: ak_CMMA { // double-tap comma = caps_word
@@ -249,10 +249,10 @@
 //
 //            ak_CMMA_cap { trigger-keys = <COMMA>; max-prior-idle-ms = <my_ak_term>; bindings = <&kp BSPC  &caps_word>; };
 //        };
-        CmmaMgc: CmmaMgc {              // Hold for CAPSLOCK, tap for COMMA
-            my_lk_config;
-            bindings = <&kp>, <&CmmaSemi>;
-        };
+//        CmmaMgc: CmmaMgc {              // Hold for CAPSLOCK, tap for COMMA
+//            my_lk_config;
+//            bindings = <&kp>, <&CmmaSemi>;
+//        };
 
 /*
  * lk_ linger key behaviors (approximated via hold-tap)
