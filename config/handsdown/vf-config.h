@@ -17,12 +17,12 @@
 #define HD_LT &ak_X           &ak_W           &ak_M           &ak_G           &ak_J
 #define HD_LM &mt_S RCTRL S   &mt_C RALT C    &mt_N RGUI N    &mt_T RSHFT T   &ak_K
 #define HD_LB &ak_F           &ak_P           &ak_L           &ak_D           &ak_V
-#define HD_LH                                                 &lt_BspcDel     &lt_R l_nav R
+#define HD_LH                                                 &lt_BspcDel     &lt l_nav SPACE
 
 #define HD_RT &HashDllr       &DotColn        &SlshStar       &DqtLbkt        &SqtRbkt
 #define HD_RM &CommaMagic       &mt_A LSHFT A   &mt_E LGUI E    &mt_I LALT I    &mt_H LCTRL H
 #define HD_RB &MinusPlus      &ak_U           &ak_O           &ak_Y           &ak_B
-#define HD_RH &lt l_sym SPACE &lt l_nav RETURN
+#define HD_RH &lt_R l_sym R   &lt l_nav RETURN
 
 // Japanese "mode" (no adaptives, & L, C, X not used so repurpose to ん, Z, -)
 #define JP_Layer_label "HD-JP"
