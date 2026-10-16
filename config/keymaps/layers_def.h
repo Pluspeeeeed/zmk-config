@@ -30,10 +30,10 @@
 #define l_sym_LB &kp LBKT           &kp RBKT            &kp RPAR            &kp RBRC            &kp AT
 //                 原 LA(LS(N8))°   ]                )                 }                 (原本是空位)
 
-#define l_sym_LH &kp LCTRL BSPC     &kp LCTRL DEL
+#define l_sym_LH &m_bsdel            &m_deldel
 //                 删前一个词        删后一个词
 //                 原为 LA(BSPC) / LA(DEL) = Mac 的 ⌥⌫ / ⌥⌦
-//                 → Windows 的等价键是 Ctrl+Backspace / Ctrl+Delete ✅ 原生可用
+//                 → Windows 等价键是 Ctrl+Backspace / Ctrl+Delete（用宏实现，见 moutis_macros.dtsi）
 // -----------------------------------------------------------------------------
 
 // --- right hand --------------------------------------------------------------
@@ -45,7 +45,7 @@
 
 #define l_sym_RB &kp CARET          &kp PIPE            &kp AMPS            &lk_ltgt GT LT      &kp GT
 
-#define l_sym_RH &none              &kp LCTRL BSLH
+#define l_sym_RH &none              &m_ctrlbslh
 //                 (原本空位)        原 LA(N1)¡ → ¡ 无原生键位；此位改为 Ctrl+\
 // -----------------------------------------------------------------------------
 
@@ -58,15 +58,15 @@
 //                           ╰──────────────────╯                ╰─────────────────╯
 #define l_num_label "l_num"
 
-#define l_num_LT &kp LCTRL HOME      &kp HOME            &kp UP              &kp PG_UP           &kp LCTRL UP
+#define l_num_LT &m_docstart          &kp HOME            &kp UP              &kp PG_UP           &m_paraup
 //                 原 LG(UP)=⌘↑ 文档首 → Windows Ctrl+Home；原 LA(UP)=⌥↑ 段落上 → Windows Ctrl+↑
 #define l_num_RT &kp KP_DIVIDE      &kp KP_N7           &kp KP_N8           &kp KP_N9           &kp KP_SUBTRACT
 
-#define l_num_LM &kp LCTRL LEFT      &kp LEFT            &kp DOWN            &kp RIGHT           &kp LCTRL RIGHT
+#define l_num_LM &m_wordl            &kp LEFT            &kp DOWN            &kp RIGHT           &m_wordr
 //                 原 LA(LEFT)=⌥← / LA(RIGHT)=⌥→ 按词移动 → Windows Ctrl+← / Ctrl+→
 #define l_num_RM &kp KP_MULTIPLY    &mt RSHFT KP_N4     &mt RGUI KP_N5      &mt RALT KP_N6      &mt LCTRL KP_PLUS
 
-#define l_num_LB &kp LCTRL END       &kp END             &kp SPACE           &kp PG_DN           &kp LCTRL DOWN
+#define l_num_LB &m_docend           &kp END             &kp SPACE           &kp PG_DN           &m_paradn
 //                 原 LG(DOWN)=⌘↓ 文档尾 → Windows Ctrl+End；原 LA(DOWN)=⌥↓ 段落下 → Windows Ctrl+↓
 #define l_num_RB &kp KP_COMMA       &kp KP_N1           &kp KP_N2           &kp KP_N3           &kp KP_EQUAL
 
@@ -104,29 +104,29 @@
 //                           ╰──────────────────╯                ╰─────────────────╯
 #define l_nav_label "l_nav"
 
-#define l_nav_LT &kp LCTRL W          &kp LALT F4           &kp LCTRL S         &kp LCTRL LS(S)       &kp LCTRL F
-//                 原 RG(Q) 关窗   原 RG(Q) 退出         原 LG(LS(N4)) 截图   原 LG(LS(LC(N4)))    原 RG(F) 查找
-//                 → Windows: Ctrl+W / Alt+F4 / Ctrl+S / Ctrl+Shift+S / Ctrl+F
-//                 ⚠️ 原第 4 个是 Mac 的 ⌘⇧⌃4 区域截图，Windows 无对应；改成了 Ctrl+Shift+S（"另存为"）
+#define l_nav_LT &m_close            &m_winclose           &m_save              &kp LS(TAB)           &m_find
+//                 原 RG(Q) 关窗   原 RG(W) 退出         原 LG(LS(N4)) 截图   原 LG(LS(LC(N4)))    原 RG(F) 查找
+//                 → Windows: Ctrl+W / Alt+F4 / Ctrl+S / Ctrl+Shift+Tab / Ctrl+F
+//                 ⚠️ 原第 4 个是 Mac 的 ⌘⇧⌃4 区域截图，Windows 无对应；改成了 Ctrl+Shift+Tab（上一个标签页）
 
-#define l_nav_RT &kp LCTRL HOME       &kp HOME              &kp UP              &kp PG_UP             &kp LCTRL UP
+#define l_nav_RT &m_docstart          &kp HOME              &kp UP              &kp PG_UP             &m_paraup
 //                 原 LG(UP) 文档首 → Ctrl+Home；原 LA(UP) 段落上 → Ctrl+↑
 
-#define l_nav_LM &kp LCTRL            &kp LALT              &kp LGUI            &kp LSHFT             &kp LCTRL F
+#define l_nav_LM &kp LCTRL            &kp LALT              &kp LGUI            &kp LSHFT             &m_find
 //                 这四个是纯修饰键，Windows 下无需改（LGUI 就是 Win 键，这里是故意的）
 
-#define l_nav_RM &kp LCTRL LEFT       &kp LEFT              &kp DOWN            &kp RIGHT             &kp LCTRL RIGHT
+#define l_nav_RM &m_wordl             &kp LEFT              &kp DOWN            &kp RIGHT             &m_wordr
 //                 原 LA(LEFT)/LA(RIGHT) 按词 → Windows Ctrl+← / Ctrl+→
 
-#define l_nav_LB &kp LCTRL Z          &kp LCTRL X           &kp LCTRL C         &kp LCTRL V           &kp F3
+#define l_nav_LB &m_undo              &m_cut                &m_copy             &m_paste              &kp F3
 //                 原 RG(Z)(X)(C)(V) ⌘Z/X/C/V → Windows Ctrl+Z / Ctrl+X / Ctrl+C / Ctrl+V
 //                 原 RG(G) = ⌘G 查找下一个 → Windows 用 F3
 
-#define l_nav_RB &kp LCTRL END        &kp END               &kp DOWN            &kp PG_DN             &kp LCTRL DOWN
+#define l_nav_RB &m_docend            &kp END               &kp DOWN            &kp PG_DN             &m_paradn
 //                 原 LG(DOWN) 文档尾 → Ctrl+End；原 LA(DOWN) 段落下 → Ctrl+↓
 
 #define l_nav_LH &none          &none
-#define l_nav_RH &kp LCTRL LBKT       &kp LCTRL RBKT
+#define l_nav_RH &m_pgback            &m_pgfwd
 //                 原 LG(LBKT)/LG(RBKT) = ⌘[ / ⌘] 前进后退 → Windows Ctrl+[ / Ctrl+]
 
 //                                          Keyboard & System Settings
@@ -140,19 +140,19 @@
 #define l_cfg_label "l_cfg"
 
 #define l_cfg_LT &bt BT_SEL 3       &bt BT_SEL 2        &bt BT_SEL 1        &bt BT_SEL 0        &bt BT_CLR
-#define l_cfg_RT &kp LCTRL N0       &none               &none               &kp LALT F4         &kp LCTRL LS(ESC)
+#define l_cfg_RT &m_zoomrst         &none               &none               &m_winclose         &m_taskmgr
 //                 原 LG(N0) 缩放归位 → Windows Ctrl+0
 //                 原 LC(LA(DEL)) Mac 强制注销 → Windows 无对应，改为 Alt+F4（关当前窗口）
 //                 原 LG(LA(ESCAPE)) Mac 强制退出 → Windows 改为 Ctrl+Shift+Esc（任务管理器）
 
 #define l_cfg_LM &none              &kp C_NEXT          &kp C_PP            &kp C_VOL_UP        &kp C_BRI_UP
-#define l_cfg_RM &kp LCTRL EQUAL    &kp C_VOL_UP        &kp C_MUTE          &kp C_NEXT          &none
+#define l_cfg_RM &m_zoomin          &kp C_VOL_UP        &kp C_MUTE          &kp C_NEXT          &none
 //                 原 LG(EQUAL) ⌘= 放大 → Windows Ctrl+=
 
 #define l_cfg_LB &rst_btld          &kp C_PREV          &kp C_MUTE          &kp C_VOL_DN        &kp C_BRI_DN
-#define l_cfg_RB &kp LCTRL MINUS    &kp C_VOL_DN        &kp C_PP            &kp C_PREV          &rst_btld
+#define l_cfg_RB &m_zoomout         &kp C_VOL_DN        &kp C_PP            &kp C_PREV          &rst_btld
 //                 原 LG(MINUS) ⌘- 缩小 → Windows Ctrl+-
 
-#define l_cfg_LH &kp LCTRL EQUAL    &kp LCTRL MINUS
-#define l_cfg_RH &kp LCTRL MINUS    &kp LCTRL EQUAL
+#define l_cfg_LH &m_zoomin          &m_zoomout
+#define l_cfg_RH &m_zoomout         &m_zoomin
 //                 原 LG(EQUAL)/LG(MINUS) → Windows Ctrl+= / Ctrl+-

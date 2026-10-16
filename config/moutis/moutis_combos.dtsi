@@ -55,22 +55,22 @@ COMBO_LAYER(capslk,  &kp CAPS,      RB2 RB3 RB4, l_alpha) // CAPS LOCK
 /* ⚠️ 原版是 macOS 的 ⌘ 快捷键，Windows 上 LG() = Win 键（会弹开始菜单）。
    以下已全部改为 Windows 的 Ctrl 等价键。标注 ← 的行是行为有变化的。 */
 
-COMBO_ANY(Gent,      &kp LALT RETURN, LB2 LB1 LB0) // ← 原 LG(RETURN) ⌘↵ → Windows Alt+Enter
+COMBO_ANY(Gent,      &m_winclose,    LB2 LB1 LB0) // ← 原 LG(RETURN) ⌘↵ → Windows Alt+F4（原 Alt+Enter 在资源管理器才有用）
 COMBO_ANY(entr,      &kp RETURN,     LB1 LB0)
 COMBO_ANY(tab,       &kp TAB,        LT4 LT3)
 COMBO_ANY(stab,      &kp LS(TAB),    LT4 LT3 LT2)
 COMBO_ANY(spce,      &kp SPACE,      LM1 LM0)
 COMBO_ANY(esc,       &kp ESC,        LM4 LM1)
 
-COMBO_ANY(sall,      &kp LCTRL A,      LB4 LB1)          // 原 LG(A)  ⌘A → Ctrl+A
-COMBO_ANY(undo,      &kp LCTRL Z,      LB4 LB3)          // 原 LG(Z)  ⌘Z → Ctrl+Z
-COMBO_ANY(redo,      &kp LCTRL Y,      LB4 LB3 LB2)      // ← 原 LG(LS(Z)) ⇧⌘Z → Windows 是 Ctrl+Y
-COMBO_ANY(copy,      &lk LCTRL X LCTRL C, LB3 LB2)       // ← 原 LG(X)/LG(C)；长按仍是纯文本粘贴
-COMBO_ANY(pste,      &lk LCTRL LS(V) LCTRL V, LB2 LB1)   // ← 原 LG(LS(LA(V)))/LG(V)；Win 纯文本粘贴 = Ctrl+Shift+V
-COMBO_LAYER(quit,    &kp LALT F4,      LT0 LM0, l_alpha) // ← 原 LG(Q) ⌘Q → Windows Alt+F4
-COMBO_LAYER(new,     &kp LCTRL N,      LM0 LB0, l_alpha) // 原 LG(N) ⌘N → Ctrl+N
-COMBO_LAYER(cloz,    &kp LCTRL W,      RT0 RM0, l_alpha) // 原 LG(W) ⌘W → Ctrl+W
-COMBO_LAYER(open,    &kp LCTRL O,      RM0 RB0, l_alpha) // 原 LG(O) ⌘O → Ctrl+O
+COMBO_ANY(sall,      &m_selectall,   LB4 LB1)          // 原 LG(A)  ⌘A → Ctrl+A
+COMBO_ANY(undo,      &m_undo,        LB4 LB3)          // 原 LG(Z)  ⌘Z → Ctrl+Z
+COMBO_ANY(redo,      &m_redo,        LB4 LB3 LB2)      // ← 原 LG(LS(Z)) ⇧⌘Z → Windows 是 Ctrl+Y
+COMBO_ANY(copy,      &kp LCTRL C,    LB3 LB2)          // 原 LG(X)/LG(C) 剪切/复制
+COMBO_ANY(pste,      &kp LCTRL V,    LB2 LB1)          // 原 LG(LS(LA(V)))/LG(V) 纯文本/普通粘贴
+COMBO_LAYER(quit,    &m_winclose,    LT0 LM0, l_alpha) // ← 原 LG(Q) ⌘Q → Windows Alt+F4（关当前窗口）
+COMBO_LAYER(new,     &m_new,         LM0 LB0, l_alpha) // 原 LG(N) ⌘N → Ctrl+N
+COMBO_LAYER(cloz,    &m_close,       RT0 RM0, l_alpha) // 原 LG(W) ⌘W → Ctrl+W
+COMBO_LAYER(open,    &m_open,        RM0 RB0, l_alpha) // 原 LG(O) ⌘O → Ctrl+O
 
 COMBO_LAYER(selword, &m_selword,     LB4 LB0, l_alpha)
 COMBO_LAYER(findsel, &m_findsel,     LM4 LB0, l_alpha)
