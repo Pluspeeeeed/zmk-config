@@ -52,55 +52,72 @@ COMBO_LAYER(capslk,  &kp CAPS,      RB2 RB3 RB4, l_alpha) // CAPS LOCK
 
 
 /* Editing actions (&whitespace) */
+/* ⚠️ 原版是 macOS 的 ⌘ 快捷键，Windows 上 LG() = Win 键（会弹开始菜单）。
+   以下已全部改为 Windows 的 Ctrl 等价键。标注 ← 的行是行为有变化的。 */
 
-COMBO_ANY(Gent,      &kp LG(RETURN), LB2 LB1 LB0)
+COMBO_ANY(Gent,      &kp LALT RETURN, LB2 LB1 LB0) // ← 原 LG(RETURN) ⌘↵ → Windows Alt+Enter
 COMBO_ANY(entr,      &kp RETURN,     LB1 LB0)
 COMBO_ANY(tab,       &kp TAB,        LT4 LT3)
 COMBO_ANY(stab,      &kp LS(TAB),    LT4 LT3 LT2)
 COMBO_ANY(spce,      &kp SPACE,      LM1 LM0)
 COMBO_ANY(esc,       &kp ESC,        LM4 LM1)
 
-COMBO_ANY(sall,      &kp LG(A),      LB4 LB1)
-COMBO_ANY(undo,      &kp LG(Z),      LB4 LB3)
-COMBO_ANY(redo,      &kp LG(LS(Z)),  LB4 LB3 LB2)
-COMBO_ANY(copy,      &lk LG(X) LG(C), LB3 LB2)
-COMBO_ANY(pste,      &lk LG(LS(LA(V))) LG(V), LB2 LB1)
-COMBO_LAYER(quit,    &kp LG(Q),      LT0 LM0, l_alpha)
-COMBO_LAYER(new,     &kp LG(N),      LM0 LB0, l_alpha)
-COMBO_LAYER(cloz,    &kp LG(W),      RT0 RM0, l_alpha)
-COMBO_LAYER(open,    &kp LG(O),      RM0 RB0, l_alpha)
+COMBO_ANY(sall,      &kp LCTRL A,      LB4 LB1)          // 原 LG(A)  ⌘A → Ctrl+A
+COMBO_ANY(undo,      &kp LCTRL Z,      LB4 LB3)          // 原 LG(Z)  ⌘Z → Ctrl+Z
+COMBO_ANY(redo,      &kp LCTRL Y,      LB4 LB3 LB2)      // ← 原 LG(LS(Z)) ⇧⌘Z → Windows 是 Ctrl+Y
+COMBO_ANY(copy,      &lk LCTRL X LCTRL C, LB3 LB2)       // ← 原 LG(X)/LG(C)；长按仍是纯文本粘贴
+COMBO_ANY(pste,      &lk LCTRL LS(V) LCTRL V, LB2 LB1)   // ← 原 LG(LS(LA(V)))/LG(V)；Win 纯文本粘贴 = Ctrl+Shift+V
+COMBO_LAYER(quit,    &kp LALT F4,      LT0 LM0, l_alpha) // ← 原 LG(Q) ⌘Q → Windows Alt+F4
+COMBO_LAYER(new,     &kp LCTRL N,      LM0 LB0, l_alpha) // 原 LG(N) ⌘N → Ctrl+N
+COMBO_LAYER(cloz,    &kp LCTRL W,      RT0 RM0, l_alpha) // 原 LG(W) ⌘W → Ctrl+W
+COMBO_LAYER(open,    &kp LCTRL O,      RM0 RB0, l_alpha) // 原 LG(O) ⌘O → Ctrl+O
 
 COMBO_LAYER(selword, &m_selword,     LB4 LB0, l_alpha)
 COMBO_LAYER(findsel, &m_findsel,     LM4 LB0, l_alpha)
 
 
 /* type a glyph, with lingers (tiny board accommodation) */
+/* ⚠️ LA(...) 在 Mac 上是 Option 组合（能出 † ‡ ¶ … 等）；Windows 上 LA = Alt，不会产生这些字符。 */
 
-COMBO_LAYER(t_Coln,  &lk LA(SEMI) COLON,    RT1 RT3, l_alpha)
+COMBO_LAYER(t_Coln,  &kp COLON,             RT1 RT3, l_alpha)
+//                 原 &lk LA(SEMI) COLON → Windows 无 Option+; 可用，改为直接输出 ':'
 COMBO_LAYER(t_Semi,  &kp SEMI,              RM0 RM1, l_alpha)
 COMBO_LAYER(t_Excl,  &kp EXCL,              RT1 RT2, l_alpha)
 COMBO_LAYER(t_Ques,  &kp QMARK,             RT2 RT3, l_alpha)
 COMBO_LAYER(t_Grav,  &kp GRAVE,             RT3 RT4, l_alpha)
-COMBO_LAYER(t_atMk,  &lk LS(LA(SEMI)) AT_SIGN,  RT0 RT1, l_alpha)   // @ (№ if held)
+COMBO_LAYER(t_atMk,  &kp AT,                RT0 RT1, l_alpha)
+//                 原 &lk LS(LA(SEMI)) AT_SIGN（长按出 №）→ № 无原生键位，简化成 '@'
 COMBO_LAYER(t_Under, &kp UNDER,             RB1 RB3, l_alpha)       // _
 COMBO_LAYER(t_Equal, &lk PRCNT EQUAL,       RB2 RB3, l_alpha)       // = (percent if held)
-COMBO_LAYER(t_Ndash, &lk LA(LS(MINUS)) LA(MINUS), RB0 RB1, l_alpha) // N-dash (M-dash if held)
-COMBO_LAYER(t_Mdash, &kp LA(LS(MINUS)),     RB0 RB2, l_alpha)       // M-dash (minus)
+COMBO_LAYER(t_Ndash, &kp MINUS,             RB0 RB1, l_alpha)
+//                 原 &lk LA(LS(MINUS)) LA(MINUS) → Mac 的 –/— (en/em dash)，Windows 无原生键位
+//                 ⚠️ 已退化为普通 '-'。想要 –/— 见文末"待你决定"
+COMBO_LAYER(t_Mdash, &kp MINUS,             RB0 RB2, l_alpha)
+//                 同上，原 LA(LS(MINUS)) = — em dash，已退化为 '-'
 COMBO_LAYER(t_Tilde, &kp TILDE,             RB0 RB3, l_alpha)       // ~ tilde (wave dash)
 
-COMBO_LAYER(ligAE,   &kp LA(APOS),          RM1 RB1, l_alpha)       // ligature æ
-COMBO_LAYER(ligOE,   &kp LA(Q),             RM2 RB2, l_alpha)       // ligature œ
+COMBO_LAYER(ligAE,   &kp DQT,               RM1 RB1, l_alpha)
+//                 原 LA(APOS) 出 æ → æ 无原生键位；此位改为 '"'
+COMBO_LAYER(ligOE,   &kp SQT,               RM2 RB2, l_alpha)
+//                 原 LA(Q) 出 œ → œ 无原生键位；此位改为 '\''
 
-COMBO_LAYER(diacAccent, &lk_E_accent E LA(E),   RM1 RM2, l_alpha)   // ´ (É if held)
-COMBO_LAYER(diacGrave,  &lk_E_grave E LA(GRAVE), RM2 RM3, l_alpha)  // ` (È if held)
-COMBO_LAYER(diacAcute,  &lk_E_acute E LA(N6),   RM1 RM3, l_alpha)   // ˆ (Ê if held)
-COMBO_LAYER(diacMacron, &lk_O_macron E LA(A),   RM2 RM4, l_alpha)   // ¯ (ō if held)
-COMBO_LAYER(diacCirc,   &lk_A_ring A LA(K),     RM1 RM4, l_alpha)   // ˚ (Å if held)
-COMBO_LAYER(diacUmlaut, &lk_U_umlaut U LA(U),   RB1 RB2, l_alpha)   // ¨ (Ü if held)
-COMBO_LAYER(diacCedille, &lk_C_cedille C LA(C), LM4 LM2, l_alpha)   // ¸ (ç if held)
+/* ⚠️ 变音符号（dead key）整组是为 macOS 设计的：
+   原写法 &kp LA(E) &kp E = 先按 ⌥E（死键 ´）再按 E → 得到 é。
+   Windows 上 LA(E) 只是 Alt+E（菜单键），不会有死键效果，输出会变成乱码。
+   Windows 无原生死键；已改为直接输出对应的单个字符（去掉组合）。
+   若你需要这些字母，见文末"待你决定"。 */
+
+COMBO_LAYER(diacAccent, &kp E,              RM1 RM2, l_alpha)   // 原 ´ (⌥E) → 退化为 'e'
+COMBO_LAYER(diacGrave,  &kp E,              RM2 RM3, l_alpha)   // 原 ` (⌥`) → 退化为 'e'
+COMBO_LAYER(diacAcute,  &kp E,              RM1 RM3, l_alpha)   // 原 ˆ (⌥I) → 退化为 'e'
+COMBO_LAYER(diacMacron, &kp O,              RM2 RM4, l_alpha)   // 原 ¯ (⌥A) → 退化为 'o'
+COMBO_LAYER(diacCirc,   &kp A,              RM1 RM4, l_alpha)   // 原 ˚ (⌥K) → 退化为 'a'
+COMBO_LAYER(diacUmlaut, &kp U,              RB1 RB2, l_alpha)   // 原 ¨ (⌥U) → 退化为 'u'
+COMBO_LAYER(diacCedille,&kp C,              LM4 LM2, l_alpha)   // 原 ¸ (⌥C) → 退化为 'c'
 
 
 /* numpad symbol combos */
+/* ⚠️ 以下 4 个带 LA() 的在 Windows 上无效，已改。 */
 
 COMBO_LAYER(numLPRN,    &kp LPAR,           RM1 RM2, l_num)
 COMBO_LAYER(numRPRN,    &kp RPAR,           RM2 RM3, l_num)
@@ -109,12 +126,12 @@ COMBO_LAYER(numCOLN,    &kp COLON,          RM1 RM3, l_num)
 COMBO_LAYER(numPRCNT,   &kp PRCNT,          RB3 RB4, l_num)
 COMBO_LAYER(numLT,      &kp LT,             RM0 RM1, l_num)
 COMBO_LAYER(numGT,      &kp GT,             RM0 RM4, l_num)
-COMBO_LAYER(numDASH,    &kp LA(MINUS),      RB0 RB1, l_num)
+COMBO_LAYER(numDASH,    &kp MINUS,          RB0 RB1, l_num)   // 原 LA(MINUS)=– en dash，无原生键位 → '-'
 COMBO_LAYER(numTILD,    &kp TILDE,          RB0 RB4, l_num)
-COMBO_LAYER(numELIP,    &kp LA(SEMI),       RB1 RB4, l_num)
+COMBO_LAYER(numELIP,    &kp FSLH,           RB1 RB4, l_num)   // 原 LA(SEMI)=… 无原生键位 → '/'
 
-COMBO_LAYER(numDLLR,    &kp DLLR,           RT1 RT2, l_num) // $
-COMBO_LAYER(numCENT,    &kp LA(N4),         RT0 RT1, l_num) // ¢
-COMBO_LAYER(numEURO,    &kp LS(LA(N2)),     RT2 RT3, l_num) // €
-COMBO_LAYER(numYEN,     &kp LA(Y),          RT3 RT4, l_num) // ¥
-COMBO_LAYER(numBPND,    &kp LA(N3),         RT1 RT3, l_num) // £
+COMBO_LAYER(numDLLR,    &kp DLLR,           RT1 RT2, l_num)   // $
+COMBO_LAYER(numCENT,    &kp CARET,          RT0 RT1, l_num)   // 原 LA(N4)=¢ 无原生键位 → '^'
+COMBO_LAYER(numEURO,    &kp EQUAL,          RT2 RT3, l_num)   // 原 LS(LA(N2))=€ 无原生键位 → '='
+COMBO_LAYER(numYEN,     &kp BSLH,           RT3 RT4, l_num)   // 原 LA(Y)=¥ 无原生键位 → '\'
+COMBO_LAYER(numBPND,    &kp HASH,           RT1 RT3, l_num)   // 原 LA(N3)=£ 无原生键位 → '#'

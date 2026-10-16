@@ -48,30 +48,35 @@
 
     ZMK_MACRO(m_selword,
         tap-ms = <40>;
-        bindings = <&macro_tap &kp LA(LEFT)>
-                    , <&macro_tap &kp LS(LA(RIGHT))>
+        bindings = <&macro_tap &kp LCTRL LEFT>
+                    , <&macro_tap &kp LCTRL LS(RIGHT)>
                 ;
         )
+        // 原为 Mac 的 ⌥← / ⇧⌥→（按词选中）；Windows 等价键是 Ctrl+← / Ctrl+Shift+→
     ZMK_MACRO(m_findsel,
         tap-ms = <40>;
-        bindings = <&macro_tap &kp LG(C)>
-                    , <&macro_tap &kp LG(F)>
-                    , <&macro_tap &kp LG(V)>
+        bindings = <&macro_tap &kp LCTRL C>
+                    , <&macro_tap &kp LCTRL F>
+                    , <&macro_tap &kp LCTRL V>
                     , <&macro_tap &kp RETURN>
-                    , <&macro_tap &kp LG(G)>
+                    , <&macro_tap &kp F3>
                 ;
         )
+        // 原为 Mac 的 ⌘C / ⌘F / ⌘V / ⌘G（查找下一个）；Windows 对应 Ctrl+C / Ctrl+F / Ctrl+V / F3
 
     ZMK_MACRO(pairDquo,
         wait-ms = <50>; // need to slow this down for some systems.
-        bindings = <&kp LA(LBKT) &kp LS(LA(LBKT)) &kp LEFT>
+        bindings = <&kp DQT &kp DQT &kp LEFT>
                 ;
         )
+        // 原为 Mac 的 ⌥[ / ⇧⌥[ 产生弯引号 “ ”；Windows 无原生键位，
+        // 已退化为两个直引号 ""（光标停在中间）。若要 “ ” 见 moutis_combos.dtsi 文末"待你决定"。
     ZMK_MACRO(pairSquo,
         wait-ms = <50>; // need to slow this down for some systems.
-        bindings = <&kp LA(RBKT) &kp LS(LA(RBKT)) &kp LEFT>
+        bindings = <&kp SQT &kp SQT &kp LEFT>
                 ;
         )
+        // 原为 Mac 的 ⌥] / ⇧⌥] 产生弯引号 ‘ ’；已退化为两个直引号 ''
     ZMK_MACRO(pairLtGt,
         wait-ms = <50>; // need to slow this down for some systems.
         bindings = <&kp LT &kp GT &kp LEFT>
@@ -114,41 +119,11 @@
                 , <&macro_tap &kp SEMICOLON>
                 ;
         )
-    ZMK_MACRO(t_Eaccent,
-        tap-ms = <40>;
-        bindings = <&kp LA(E) &kp E>
-                ;
-        )
-    ZMK_MACRO(t_Egrave,
-        tap-ms = <40>;
-        bindings = <&kp LA(GRAVE) &kp E>
-                ;
-        )
-    ZMK_MACRO(t_Eacute,
-        tap-ms = <40>;
-        bindings = <&kp LA(N6) &kp E>
-                ;
-        )
-    ZMK_MACRO(t_Omacron,
-        tap-ms = <40>;
-        bindings = <&kp LA(A) &kp O>
-                ;
-        )
-    ZMK_MACRO(t_Aring,
-        tap-ms = <40>;
-        bindings = <&kp LA(K) &kp A>
-                ;
-        )
-    ZMK_MACRO(t_Uumlaut,
-        tap-ms = <40>;
-        bindings = <&kp LA(U) &kp U>
-                ;
-        )
-    ZMK_MACRO(t_Cedille,
-        tap-ms = <40>;
-        bindings = <&kp LA(C) &kp C>
-                ;
-        )
+    // ⚠️ 已删除 7 个 macOS 死键宏（t_Eaccent / t_Egrave / t_Eacute / t_Omacron /
+    //    t_Aring / t_Uumlaut / t_Cedille）。它们依赖 Mac 的 Option 死键
+    //    （&kp LA(E) &kp E → é），Windows 上只会输出乱码。
+    //    对应的 combo 已改为直接输出单个字母（见 moutis_combos.dtsi）。
+
     ZMK_MACRO(t_pg,
         tap-ms = <40>;
         bindings = <&kp P &kp G>;
