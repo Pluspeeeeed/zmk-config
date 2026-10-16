@@ -48,24 +48,34 @@
 
     ZMK_MACRO(m_selword,
         tap-ms = <40>;
-        // ⚠️ `&kp LCTRL LEFT` 是 **两个 cell** 的绑定，不能放在 `&macro_tap` 后面
-        //    （会被拆成两个 binding slot，编译报 DT_..._IDX_2_PH_FULL_NAME undeclared）。
-        //    要么直接写 `&kp`（宏默认就是 tap 模式、支持多 cell），要么显式 press/release。
-        bindings = <&kp LCTRL LEFT>
-                    , <&kp LCTRL LS(RIGHT)>
-                ;
+        // ⚠️ 宏的 bindings 是 phandle-array，每一个 phandle 只能带 **一个** cell。
+        //    `&kp LCTRL LEFT` 是 2 个 cell，会被拆成两个 slot → 编译报
+        //    DT_..._bindings_IDX_1_PH_FULL_NAME undeclared。
+        //    修法与同文件里的 SlAppy 一致：显式 press/release 修饰键。
+        bindings = <&macro_press   &kp LCTRL>
+                 , <&kp LEFT>
+                 , <&macro_release &kp LCTRL>
+                 , <&macro_press   &kp LCTRL &kp LSHFT>
+                 , <&kp RIGHT>
+                 , <&macro_release &kp LSHFT &kp LCTRL>
+                 ;
         )
         // 原为 Mac 的 ⌥← / ⇧⌥→（按词选中）；Windows 等价键是 Ctrl+← / Ctrl+Shift+→
     ZMK_MACRO(m_findsel,
         tap-ms = <40>;
-        bindings = <&kp LCTRL C>
-                    , <&kp LCTRL F>
-                    , <&kp LCTRL V>
-                    , <&kp RETURN>
-                    , <&kp F3>
-                ;
+        bindings = <&macro_press   &kp LCTRL &kp LSHFT>
+                 , <&kp C>
+                 , <&macro_release &kp LSHFT>
+                 , <&kp F>
+                 , <&kp V>
+                 , <&macro_release &kp LCTRL>
+                 , <&kp RETURN>
+                 , <&kp F3>
+                 ;
         )
-        // 原为 Mac 的 ⌘C / ⌘F / ⌘V / ⌘G（查找下一个）；Windows 对应 Ctrl+C / Ctrl+F / Ctrl+V / F3
+        // 原为 Mac 的 ⌘C / ⌘F / ⌘V / ⌘G（查找下一个）
+        // Windows: Ctrl+Shift+C 复制 / Ctrl+F 查找 / Ctrl+V 粘贴 / Enter / F3 下一个
+        // （Windows Terminal 用 Ctrl+Shift+C 复制；用 Ctrl+C 会变成中断信号）
 
     ZMK_MACRO(pairDquo,
         wait-ms = <50>; // need to slow this down for some systems.
