@@ -36,7 +36,10 @@
 #define COMMA_CAP     // , before alpha capitalizes that alpha
 
 #define my_ak_term 350 // behavior-adaptive-key trigger time window
-#define my_cc_term 1400 // Comma Magic 专用时间窗；上游用 (my_ak_term * 4)，这里写字面值以免 DT cell 不接受宏表达式
+// #define my_cc_term 1400 // 已停用：Comma Magic 沿用 my_ak_term(350ms)。
+//   上游 PR#19 用 4 倍窗口(1400ms)，但那样在中文输入法下更容易误触发
+//   （中文全角逗号 + 1400ms 内按字母 -> 逗号被删并弹出大写字母）。
+//   若想恢复上游行为，取消注释并把 26 条 akX_Cap 的 <my_ak_term> 换回 <my_cc_term>。
 #define my_ak_delay 50 // behavior-adaptive-key typing speed
 #define my_sticky_term 1100 // for sticky keys and sticky layers
 
