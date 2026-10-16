@@ -172,7 +172,11 @@
         DqtLbkt: DqtLbkt { // "[
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&DqtLT>, <&kp LA(BSLH)>;
+            // 原为 <&kp LA(BSLH)> = Mac 的 ⌥\ → “["。Windows 上 Alt+\ 不产生字符。
+            // 改为直接输出反斜杠（两个平台都可用）。
+            // ⚠️ 注意：alpha 层 A 位是 &mt_A LALT A（按住=Alt），所以 Alt 路径实际上到不了这里。
+            //    若你要 "[" / "'"，用 l_sym 层的 [ ] 键即可。
+            bindings = <&DqtLT>, <&kp BSLH>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         DqtGT: DqtGT { // ">
@@ -184,7 +188,8 @@
         DqtRbkt: DqtRbkt { // "]
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&DqtGT>, <&kp LS(LA(BSLH))>;
+            // 原为 <&kp LS(LA(BSLH))> = Mac 的 ⇧⌥\ → “]”。同上，改为 BSLH。
+            bindings = <&DqtGT>, <&kp BSLH>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         SqtLT: SqtLT { // '<
@@ -196,7 +201,8 @@
         SqtLbkt: SqtLbkt { // '[
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&SqtLT>, <&kp LA(BSLH)>;
+            // 原为 <&kp LA(BSLH)> = Mac 的 ⌥\ → “'”。同上，改为 BSLH。
+            bindings = <&SqtLT>, <&kp BSLH>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
         SqtGT: SqtGT { // '>
@@ -208,7 +214,8 @@
         SqtRbkt: SqtRbkt { // ']
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&SqtGT>, <&kp LS(LA(BSLH))>;
+            // 原为 <&kp LS(LA(BSLH))> = Mac 的 ⇧⌥\ → “]”。同上，改为 BSLH。
+            bindings = <&SqtGT>, <&kp BSLH>;
             mods = <(MOD_LALT|MOD_RALT)>;
         };
 
@@ -268,35 +275,10 @@
             my_lk_config;
             bindings = <&kp>, <&t_Qu>;
         };
-        lk_E_accent: lk_E_accent { // ´, é on "linger"
-            my_lk_config;
-            bindings = <&t_Eaccent>, <&kp>;
-        };
-        lk_E_grave: lk_E_grave { // `, è on "linger"
-            my_lk_config;
-            bindings = <&t_Egrave>, <&kp>;
-        };
-        lk_E_acute: lk_E_acute { // ˆ, ê on "linger"
-            my_lk_config;
-            bindings = <&t_Eacute>, <&kp>;
-        };
-        lk_O_macron: lk_O_macron { // ¯, ō on "linger"
-            my_lk_config;
-            bindings = <&t_Omacron>, <&kp>;
-        };
-        lk_A_ring: lk_A_ring { // ˚, å on "linger"
-            my_lk_config;
-            bindings = <&t_Aring>, <&kp>;
-        };
-        lk_U_umlaut: lk_U_umlaut { // ¨, ü on "linger"
-            my_lk_config;
-            bindings = <&t_Uumlaut>, <&kp>;
-        };
-        lk_C_cedille: lk_C_cedille { // ¸, ç on "linger"
-            my_lk_config;
-            bindings = <&t_Cedille>, <&kp>;
-        };
-
+        // ⚠️ 已删除 7 个 macOS 死键 linger 行为（lk_E_accent / lk_E_grave /
+        //    lk_E_acute / lk_O_macron / lk_A_ring / lk_U_umlaut / lk_C_cedille）。
+        //    它们依赖 Mac 的 Option 死键宏，Windows 上无法工作；
+        //    对应的 diac* combo 已改为直接输出单个字母（见 moutis_combos.dtsi）。
 
         lk_Japan: lk_Japan { // Japan on tap, Japanese on "linger"
             my_lk_config;

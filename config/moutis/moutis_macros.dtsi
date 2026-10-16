@@ -46,32 +46,87 @@
                   ;
         )
 
+    // ---------------------------------------------------------------------
+    // Windows 组合键宏
+    // ⚠️ 为什么必须写成宏：keymap 里每个 binding slot 只接受 **一个 cell**。
+    //    这里的 thumb 位（HD_RH 等）就是一个 slot，塞 `&kp LCTRL BSLH`（2 个 cell）
+    //    会把后面所有位置的 cell 数错位，编译报 DT_..._bindings_IDX_51_PH_FULL_NAME undeclared。
+    //    用宏包起来 → 宏本身 #binding-cells = <0>，占 1 个 cell，位置就对齐了。
+    //    （同样的道理适用于所有把多 cell 绑定放进单个 slot 的地方。）
+    // ---------------------------------------------------------------------
+    ZMK_MACRO(m_bsdel,   tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp BSPC>,  <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_deldel,  tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp DEL>,   <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_ctrlbslh,tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp BSLH>,  <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_winclose,tap-ms=<20>; bindings = <&macro_press &kp LALT>,  <&kp F4>,    <&macro_release &kp LALT>; )
+    ZMK_MACRO(m_taskmgr, tap-ms = <20>; bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&kp ESC>, <&macro_release &kp LSHFT &kp LCTRL>; )
+    ZMK_MACRO(m_redo,    tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp Y>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_save,    tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp S>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_quit,    tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp Q>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_new,     tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp N>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_close,   tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp W>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_open,    tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp O>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_selectall,tap-ms=<20>; bindings = <&macro_press &kp LCTRL>, <&kp A>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_undo,    tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp Z>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_cut,     tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp X>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_copy,    tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp C>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_paste,   tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp V>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_find,    tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp F>,    <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_pgback,  tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp LBKT>, <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_pgfwd,   tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp RBKT>, <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_docstart,tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp HOME>, <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_docend,  tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp END>,  <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_wordl,   tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp LEFT>, <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_wordr,   tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp RIGHT>,<&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_paraup,  tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp UP>,   <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_paradn,  tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp DOWN>, <&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_zoomin,  tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp EQUAL>,<&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_zoomout, tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp MINUS>,<&macro_release &kp LCTRL>; )
+    ZMK_MACRO(m_zoomrst, tap-ms = <20>; bindings = <&macro_press &kp LCTRL>, <&kp N0>,   <&macro_release &kp LCTRL>; )
+
     ZMK_MACRO(m_selword,
         tap-ms = <40>;
-        bindings = <&macro_tap &kp LA(LEFT)>
-                    , <&macro_tap &kp LS(LA(RIGHT))>
-                ;
+        // ⚠️ 宏的 bindings 是 phandle-array，每一个 phandle 只能带 **一个** cell。
+        //    `&kp LCTRL LEFT` 是 2 个 cell，会被拆成两个 slot → 编译报
+        //    DT_..._bindings_IDX_1_PH_FULL_NAME undeclared。
+        //    修法与同文件里的 SlAppy 一致：显式 press/release 修饰键。
+        bindings = <&macro_press   &kp LCTRL>
+                 , <&kp LEFT>
+                 , <&macro_release &kp LCTRL>
+                 , <&macro_press   &kp LCTRL &kp LSHFT>
+                 , <&kp RIGHT>
+                 , <&macro_release &kp LSHFT &kp LCTRL>
+                 ;
         )
+        // 原为 Mac 的 ⌥← / ⇧⌥→（按词选中）；Windows 等价键是 Ctrl+← / Ctrl+Shift+→
     ZMK_MACRO(m_findsel,
         tap-ms = <40>;
-        bindings = <&macro_tap &kp LG(C)>
-                    , <&macro_tap &kp LG(F)>
-                    , <&macro_tap &kp LG(V)>
-                    , <&macro_tap &kp RETURN>
-                    , <&macro_tap &kp LG(G)>
-                ;
+        bindings = <&macro_press   &kp LCTRL &kp LSHFT>
+                 , <&kp C>
+                 , <&macro_release &kp LSHFT>
+                 , <&kp F>
+                 , <&kp V>
+                 , <&macro_release &kp LCTRL>
+                 , <&kp RETURN>
+                 , <&kp F3>
+                 ;
         )
+        // 原为 Mac 的 ⌘C / ⌘F / ⌘V / ⌘G（查找下一个）
+        // Windows: Ctrl+Shift+C 复制 / Ctrl+F 查找 / Ctrl+V 粘贴 / Enter / F3 下一个
+        // （Windows Terminal 用 Ctrl+Shift+C 复制；用 Ctrl+C 会变成中断信号）
 
     ZMK_MACRO(pairDquo,
         wait-ms = <50>; // need to slow this down for some systems.
-        bindings = <&kp LA(LBKT) &kp LS(LA(LBKT)) &kp LEFT>
+        bindings = <&kp DQT &kp DQT &kp LEFT>
                 ;
         )
+        // 原为 Mac 的 ⌥[ / ⇧⌥[ 产生弯引号 “ ”；Windows 无原生键位，
+        // 已退化为两个直引号 ""（光标停在中间）。若要 “ ” 见 moutis_combos.dtsi 文末"待你决定"。
     ZMK_MACRO(pairSquo,
         wait-ms = <50>; // need to slow this down for some systems.
-        bindings = <&kp LA(RBKT) &kp LS(LA(RBKT)) &kp LEFT>
+        bindings = <&kp SQT &kp SQT &kp LEFT>
                 ;
         )
+        // 原为 Mac 的 ⌥] / ⇧⌥] 产生弯引号 ‘ ’；已退化为两个直引号 ''
     ZMK_MACRO(pairLtGt,
         wait-ms = <50>; // need to slow this down for some systems.
         bindings = <&kp LT &kp GT &kp LEFT>
@@ -114,41 +169,11 @@
                 , <&macro_tap &kp SEMICOLON>
                 ;
         )
-    ZMK_MACRO(t_Eaccent,
-        tap-ms = <40>;
-        bindings = <&kp LA(E) &kp E>
-                ;
-        )
-    ZMK_MACRO(t_Egrave,
-        tap-ms = <40>;
-        bindings = <&kp LA(GRAVE) &kp E>
-                ;
-        )
-    ZMK_MACRO(t_Eacute,
-        tap-ms = <40>;
-        bindings = <&kp LA(N6) &kp E>
-                ;
-        )
-    ZMK_MACRO(t_Omacron,
-        tap-ms = <40>;
-        bindings = <&kp LA(A) &kp O>
-                ;
-        )
-    ZMK_MACRO(t_Aring,
-        tap-ms = <40>;
-        bindings = <&kp LA(K) &kp A>
-                ;
-        )
-    ZMK_MACRO(t_Uumlaut,
-        tap-ms = <40>;
-        bindings = <&kp LA(U) &kp U>
-                ;
-        )
-    ZMK_MACRO(t_Cedille,
-        tap-ms = <40>;
-        bindings = <&kp LA(C) &kp C>
-                ;
-        )
+    // ⚠️ 已删除 7 个 macOS 死键宏（t_Eaccent / t_Egrave / t_Eacute / t_Omacron /
+    //    t_Aring / t_Uumlaut / t_Cedille）。它们依赖 Mac 的 Option 死键
+    //    （&kp LA(E) &kp E → é），Windows 上只会输出乱码。
+    //    对应的 combo 已改为直接输出单个字母（见 moutis_combos.dtsi）。
+
     ZMK_MACRO(t_pg,
         tap-ms = <40>;
         bindings = <&kp P &kp G>;
