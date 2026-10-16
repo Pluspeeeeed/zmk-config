@@ -38,7 +38,8 @@
 
 #define rst_btld reset_bootldr 0 0 // simple macro to keep the keymap uncluttered
 #define lkQuote lk_quote 0 0 // 包装宏：&lk_* 必须带 2 个参数，
-                            // 补上两个 0 就能像普通键一样只占一格
+                             // 补上两个 0 就能像普通键一样只占一格
+#define lkSquote lk_squote 0 0 // 同上，给单引号位用
          reset_bootldr: reset_bootldr { // tap for reset, hold for bootloader
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -171,15 +172,19 @@
             bindings = <&ak_DQT>, <&kp LT>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        DqtLbkt: DqtLbkt { // "[
+        DqtLbkt: DqtLbkt { // 轻点 " / Shift <   （只两层，无 Alt）
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            // 原为 <&kp LA(BSLH)> = Mac 的 ⌥\ → “["。Windows 上 Alt+\ 不产生字符。
-            // 改为直接输出反斜杠（两个平台都可用）。
-            // ⚠️ 注意：alpha 层 A 位是 &mt_A LALT A（按住=Alt），所以 Alt 路径实际上到不了这里。
-            //    若你要 "[" / "'"，用 l_sym 层的 [ ] 键即可。
-            bindings = <&DqtLT>, <&kp BSLH>;
-            mods = <(MOD_LALT|MOD_RALT)>;
+            // 原本是 <&DqtLT>, <&kp BSLH> + Alt —— 三层（" / < / 反斜杠）。
+            // 现在去掉 Alt 层，只留 " 和 <；成对输入改由外层 lk_quote 的长按负责。
+            //
+            // 内层必须用 &kp DQT，不能用 &DqtLT：
+            //   DqtLT 内部调 &ak_DQT，而 DqtLbkt 现在被 hold-tap 当 tap 行为引用，
+            //   经 DqtLT 会形成循环引用。直接发 &kp DQT 即可断开。
+            //   代价：双引号位不再有“/ 后跟引号 -> ?”那条自适应规则。该规则触发键是
+            //   FSLH，只在“先打了 /”时才需要，而 / 只在基础层有 —— 无实际损失。
+            bindings = <&kp DQT>, <&kp LT>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
         };
         DqtGT: DqtGT { // ">
             compatible = "zmk,behavior-mod-morph";
@@ -213,12 +218,13 @@
             bindings = <&kp SQT>, <&kp GT>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        SqtRbkt: SqtRbkt { // ']
+        SqtRbkt: SqtRbkt { // 轻点 ' / Shift >   （只两层，无 Alt）
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            // 原为 <&kp LS(LA(BSLH))> = Mac 的 ⇧⌥\ → “]”。同上，改为 BSLH。
-            bindings = <&SqtGT>, <&kp BSLH>;
-            mods = <(MOD_LALT|MOD_RALT)>;
+            // 原本是 <&SqtGT>, <&kp BSLH> + Alt —— 三层（' / > / 反斜杠）。
+            // 现在去掉 Alt 层，只留 ' 和 >；成对输入改由外层 lk_squote 的长按负责。
+            bindings = <&kp SQT>, <&kp GT>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
         lt_BspcDel: lt_BspcDel { // layer-tap mod-morph
@@ -298,12 +304,17 @@
             my_lk_config;
             bindings = <&t_ght>, <&t_Gh>;
         };
-        // 轻点 "（Shift 得 <，Alt 得 [）；长按出弯引号 ""
-        // cell 顺序是 <长按>, <轻点> —— 依据 ZMK 源码 behavior_hold_tap.c：
+        // ── 引号位：轻点引号 / Shift 尖括号 / 长按成对 ──────────────────
+        // hold-tap 的 cell 顺序是 <长按>, <轻点> —— 依据 ZMK 源码 behavior_hold_tap.c：
         //   bindings[0] -> hold_behavior_dev，bindings[1] -> tap_behavior_dev
         //   （对比 lk_th = <&t_tion>, <&t_Th>，注释写 "Th on tap, tion on linger"）。
-        // 用的时候必须走上面的 lkQuote 包装宏（&lk_* 声明的是 <2>，得补两个参数）。
-        lk_quote: lk_quote {
+        // 用的时候必须走上面的 lkQuote / lkSquote 包装宏
+        // （&lk_* 声明的是 #binding-cells = <2>，得补两个参数）。
+        lk_squote: lk_squote { // 单引号：轻点 ' / Shift > / 长按 ''
+            my_lk_config;
+            bindings = <&pairSquo>, <&SqtRbkt>;
+        };
+        lk_quote: lk_quote { // 双引号：轻点 " / Shift < / 长按 ""
             my_lk_config;                       // 保持 #binding-cells = <2>：
                                                 // ZMK 的 hold-tap binding 硬性规定
                                                 // 必须是 2，改成 0 会被 devicetree 拒绝
