@@ -48,18 +48,21 @@
 
     ZMK_MACRO(m_selword,
         tap-ms = <40>;
-        bindings = <&macro_tap &kp LCTRL LEFT>
-                    , <&macro_tap &kp LCTRL LS(RIGHT)>
+        // ⚠️ `&kp LCTRL LEFT` 是 **两个 cell** 的绑定，不能放在 `&macro_tap` 后面
+        //    （会被拆成两个 binding slot，编译报 DT_..._IDX_2_PH_FULL_NAME undeclared）。
+        //    要么直接写 `&kp`（宏默认就是 tap 模式、支持多 cell），要么显式 press/release。
+        bindings = <&kp LCTRL LEFT>
+                    , <&kp LCTRL LS(RIGHT)>
                 ;
         )
         // 原为 Mac 的 ⌥← / ⇧⌥→（按词选中）；Windows 等价键是 Ctrl+← / Ctrl+Shift+→
     ZMK_MACRO(m_findsel,
         tap-ms = <40>;
-        bindings = <&macro_tap &kp LCTRL C>
-                    , <&macro_tap &kp LCTRL F>
-                    , <&macro_tap &kp LCTRL V>
-                    , <&macro_tap &kp RETURN>
-                    , <&macro_tap &kp F3>
+        bindings = <&kp LCTRL C>
+                    , <&kp LCTRL F>
+                    , <&kp LCTRL V>
+                    , <&kp RETURN>
+                    , <&kp F3>
                 ;
         )
         // 原为 Mac 的 ⌘C / ⌘F / ⌘V / ⌘G（查找下一个）；Windows 对应 Ctrl+C / Ctrl+F / Ctrl+V / F3
