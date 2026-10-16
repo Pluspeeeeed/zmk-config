@@ -87,7 +87,16 @@ COMBO_LAYER(t_Ques,  &kp QMARK,             RT2 RT3, l_alpha)
 COMBO_LAYER(t_Grav,  &kp GRAVE,             RT3 RT4, l_alpha)
 COMBO_LAYER(t_atMk,  &kp AT,                RT0 RT1, l_alpha)
 //                 原 &lk LS(LA(SEMI)) AT_SIGN（长按出 №）→ № 无原生键位，简化成 '@'
-COMBO_LAYER(t_Under, &kp UNDER,             RB1 RB3, l_alpha)       // _
+// t_Under：原为 RB1 RB3（u+y，两键相隔，且与 diacUmlaut/t_Equal 夹在一起，
+//   45ms 内基本按不出来）。改到 RB2 RB4（o+b，中指定点+食指，好按），
+//   并把窗口放宽到 70ms。注意 RB2 RB4 在 l_alpha 上原本是空闲组合，无冲突。
+        combo_t_Under {
+          bindings = <&kp UNDER>;
+          key-positions = <RB2 RB4>;
+          layers = <l_alpha>;
+          slow-release;
+          timeout-ms = <70>;
+        };
 COMBO_LAYER(t_Equal, &lk PRCNT EQUAL,       RB2 RB3, l_alpha)       // = (percent if held)
 COMBO_LAYER(t_Ndash, &kp MINUS,             RB0 RB1, l_alpha)
 //                 原 &lk LA(LS(MINUS)) LA(MINUS) → Mac 的 –/— (en/em dash)，Windows 无原生键位
