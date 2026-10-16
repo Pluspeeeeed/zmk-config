@@ -4,12 +4,8 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: caksoylar
-      url-base: https://github.com/caksoylar
     - name: urob
       url-base: https://github.com/urob
-    - name: ssbb
-      url-base: https://github.com/ssbb
     # Additional modules containing boards/shields/custom code can be listed here as well
     # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
   projects:
@@ -18,6 +14,9 @@ manifest:
       revision: main
       import: app/west.yml
     - name: zmk-adaptive-key
+      remote: urob
+      revision: main
+    - name: zmk-auto-layer # 提供 &num_word
       remote: urob
       revision: main
   self:
