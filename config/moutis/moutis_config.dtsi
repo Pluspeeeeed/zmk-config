@@ -70,3 +70,11 @@
 &caps_word {
     continue-list = <UNDER MINUS BSPC DEL LEFT RIGHT>;
 };
+
+// &num_word 来自 zmk-auto-layer 模块。模块默认 continue-list 是
+// <BACKSPACE DELETE DOT COMMA PLUS MINUS STAR FSLH EQUAL>；这里补上 UNDER
+// 和方向键 —— l_num 层上右手是数字、左手是方向键，按住方向键不该退出数字模式。
+&num_word {
+    continue-list = <BACKSPACE DELETE DOT COMMA PLUS MINUS STAR FSLH EQUAL
+                     UNDER LEFT RIGHT UP DOWN HOME END PG_UP PG_DN>;
+};

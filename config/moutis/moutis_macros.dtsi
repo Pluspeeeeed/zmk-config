@@ -10,6 +10,10 @@
  *
  */
 
+     // &num_word 是 #binding-cells = <1>（要带层号），在 keymap 的单格里
+     // 必须包一层补上参数 —— 与上游 moutis 的 m_numword 同一个套路。
+     #define m_numword num_word l_num
+
      ZMK_MACRO(m_alpha,
         bindings =
             <&kp LANG2>,    // switch to Roman/Latin script (n_henk)

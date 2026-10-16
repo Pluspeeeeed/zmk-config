@@ -47,7 +47,7 @@
                              &kp LCAPS     HD_LT                        HD_RT       &kp EQUAL
                              &kp TAB       HD_LM                        HD_RM       &kp Z
                              &kp RCTRL     HD_LB    _______  _______    HD_RB       &kp Q
-                             HD_LH         &kp LGUI _______  _______    &tog l_num  HD_RH
+                             HD_LH         &kp LGUI _______  _______    &m_numword  HD_RH
                 >;
             };
 
