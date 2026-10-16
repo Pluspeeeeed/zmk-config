@@ -21,13 +21,13 @@
 #define l_sym_label "l_sym-win"
 
 // --- left hand ---------------------------------------------------------------
-#define l_sym_LT &kp Z              &kp Q               &kp PRCNT           &kp CARET           &kp DLLR
+#define l_sym_LT &kp Z              &kp Q               &kp TILDE           &kp CARET           &kp GRAVE
 //                 原 LA(LS(N9))·   LA(LS(N5))†      LA(LS(N7))‡      LA(N7)¶         (本来就是 $)
 
-#define l_sym_LM &kp LBKT           &lk_bkt RBKT LBKT   &lk_par RPAR LPAR   &lk_brc RBRC LBRC   &kp RBKT
+#define l_sym_LM &kp EXCL           &lk_bkt RBKT LBKT   &lk_par RPAR LPAR   &lk_brc RBRC LBRC   &kp SEMI
 //                 原 LA(N5)§       [                (                 {                 LA(N8)•
 
-#define l_sym_LB &kp LBKT           &kp RBKT            &kp RPAR            &kp RBRC            &kp AT
+#define l_sym_LB &kp LBKT           &kp AT              &kp RPAR            &kp RBKT            &kp QMARK
 //                 原 LA(LS(N8))°   ]                )                 }                 (原本是空位)
 
 #define l_sym_LH &m_bsdel            &m_deldel
@@ -37,7 +37,7 @@
 // -----------------------------------------------------------------------------
 
 // --- right hand --------------------------------------------------------------
-#define l_sym_RT &kp BSLH           &kp UNDER           &kp EQUAL           &kp HASH            &kp PRCNT
+#define l_sym_RT &kp BSLH           &kp UNDER           &kp STAR            &kp HASH            &kp PRCNT
 //                 原 RA(N4)¢       $                LA(LS(N2))€       LA(N3)£           RA(Y)¥
 //                 ¢ € £ ¥ 在 Windows 无原生键位。若需要，见文件末尾"待你决定"（Alt 码方案）。
 
