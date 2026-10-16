@@ -21,13 +21,13 @@
 #define l_sym_label "l_sym-win"
 
 // --- left hand ---------------------------------------------------------------
-#define l_sym_LT &kp Z              &kp Q               &kp PRCNT           &kp CARET           &kp DLLR
+#define l_sym_LT &kp Z              &kp Q               &kp LBRC            &kp CARET           &kp DLLR
 //                 原 LA(LS(N9))·   LA(LS(N5))†      LA(LS(N7))‡      LA(N7)¶         (本来就是 $)
 
-#define l_sym_LM &kp LBKT           &lk_bkt RBKT LBKT   &lk_par RPAR LPAR   &lk_brc RBRC LBRC   &kp RBKT
+#define l_sym_LM &kp LBKT           &lk_bkt RBKT LBKT   &lk_par RPAR LPAR   &lk_brc RBRC LBRC   &kp LPAR
 //                 原 LA(N5)§       [                (                 {                 LA(N8)•
 
-#define l_sym_LB &kp LBKT           &kp RBKT            &kp RPAR            &kp RBRC            &kp AT
+#define l_sym_LB &kp STAR           &kp UNDER           &kp RPAR            &kp RBRC            &kp AT
 //                 原 LA(LS(N8))°   ]                )                 }                 (原本是空位)
 
 #define l_sym_LH &m_bsdel            &m_deldel
@@ -37,13 +37,13 @@
 // -----------------------------------------------------------------------------
 
 // --- right hand --------------------------------------------------------------
-#define l_sym_RT &kp BSLH           &kp DLLR            &kp EQUAL           &kp HASH            &kp PRCNT
+#define l_sym_RT &kp BSLH           &kp MINUS           &kp EQUAL           &kp HASH            &kp PRCNT
 //                 原 RA(N4)¢       $                LA(LS(N2))€       LA(N3)£           RA(Y)¥
 //                 ¢ € £ ¥ 在 Windows 无原生键位。若需要，见文件末尾"待你决定"（Alt 码方案）。
 
 #define l_sym_RM &kp FSLH           &mt RSHFT EQUAL      &mt RGUI STAR       &mt RALT PLUS       &mt LCTRL MINUS
 
-#define l_sym_RB &kp CARET          &kp PIPE            &kp AMPS            &lk_ltgt GT LT      &kp GT
+#define l_sym_RB &kp PLUS           &kp PIPE            &kp AMPS            &lk_ltgt GT LT      &kp GT
 
 #define l_sym_RH &none              &m_ctrlbslh
 //                 (原本空位)        原 LA(N1)¡ → ¡ 无原生键位；此位改为 Ctrl+\
