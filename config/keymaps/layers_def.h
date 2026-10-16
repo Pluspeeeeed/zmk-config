@@ -21,7 +21,7 @@
 #define l_sym_label "l_sym-win"
 
 // --- left hand ---------------------------------------------------------------
-#define l_sym_LT &kp GRAVE          &kp TILDE           &kp PRCNT           &kp CARET           &kp DLLR
+#define l_sym_LT &kp Z              &kp Q               &kp PRCNT           &kp CARET           &kp DLLR
 //                 原 LA(LS(N9))·   LA(LS(N5))†      LA(LS(N7))‡      LA(N7)¶         (本来就是 $)
 
 #define l_sym_LM &kp LBKT           &lk_bkt RBKT LBKT   &lk_par RPAR LPAR   &lk_brc RBRC LBRC   &kp RBKT
