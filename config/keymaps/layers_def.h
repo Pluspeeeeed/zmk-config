@@ -10,26 +10,33 @@
 //    在 Windows 上按下去不产生任何字符（LA 只是 Alt，RA 在右手）。
 //    已全部换成 Windows 原生可打出的 ASCII 符号。
 //  * ⚠️ Windows 标准键盘没有 § ¶ • ¢ € £ ¥ ¡ ° · … 的键位，固件无法产生它们。
-//    本层改用最接近的 ASCII：§→%  ¶→^  •→\  ·→]  °→@。
+//    这些位置已改用普通 ASCII 符号 —— 具体映射见下方键位图（逐格以源码为准）。
 //    若你要真正的这些字符，两条路见本文件末尾"待你决定"。
+//           L5     L4     L3     L2     L1                       R1     R2     R3     R4     R5
 //╭─────────────────────────────────────────────╮                ╭────────────────────────────────────────────╮
-//|    `   |    ~   |   %   |   ^   |    $    |                |   \    |    $   |   =    |   #    |   %    |
-//|    [   |    [   |   (    |   {   |    ]    |                |   /    |    =   |   *    |   +    |   -    |
-//|    ]   |    ]   |   )    |   }   |   @     |                |   ^    |    |   |   &    |   <    |   >    |
+//|   Z    |   Q    |   ~   |   %   |    `    |                |   $    |   :   |   _    |   !   |   ?    |
+//|   !    |  [(    |  (()  |  {{}  |    ;    |                |   ;    |   =   |   *    |   +   |   -    |
+//|   @    |   ]    |   )   |   }   |    ?    |                |   ^    |   |   |   &    |  <|>  |   >    |
 //╰──────────────────────────╮ C/BS |  C/DEL |                | &none  |   C/\   ╭──────────────────────────╯
 //                           ╰──────────────────╯                ╰─────────────────╯
-#define l_sym_label "l_sym-win"
+//   符号说明：`[(  (()  {{}  <|>` 是 linger 键 —— 轻点出左符号，长按出整对
 
+// ── macOS 原映射（仅供对照，2026-10 已转 Windows；实际内容以上方键位图为准）──
+//   upper  L5..L1 : ·  †  ‡  ¶  (第5格本来就是 $)
+//                  ← LA(LS(N9))  LA(LS(N5))  LA(LS(N7))  LA(N7)
+//   upper  R1..R5 : ¢  $  €  £  ¥
+//                  ← RA(N4)  (原本就是 $)  LA(LS(N2))  LA(N3)  RA(Y)
+//   home   L5..L1 : §  [  (  {  •
+//                  ← LA(N5)  (三格本来就是括号)  LA(N8)
+//   lower  L5..L1 : °  ]  )  }  (原为空位)
+//                  ← LA(LS(N8))
+//   thumbs        : ⌥⌫  ⌥⌦  ¡
+//                  ← LA(BSPC)  LA(DEL)  LA(N1)
 // --- left hand ---------------------------------------------------------------
-#define l_sym_LT &kp Z              &kp Q               &kp TILDE           &kp CARET           &kp GRAVE
-//                 原 LA(LS(N9))·   LA(LS(N5))†      LA(LS(N7))‡      LA(N7)¶         (本来就是 $)
+#define l_sym_LT &kp Z              &kp Q               &kp TILDE           &kp PRCNT           &kp GRAVE
 
 #define l_sym_LM &kp EXCL           &lk_bkt RBKT LBKT   &lk_par RPAR LPAR   &lk_brc RBRC LBRC   &kp SEMI
-//                 原 LA(N5)§       [                (                 {                 LA(N8)•
-
 #define l_sym_LB &kp AT           &kp RBKT              &kp RPAR            &kp RBRC            &kp QMARK
-//                 原 LA(LS(N8))°   ]                )                 }                 (原本是空位)
-
 #define l_sym_LH &m_bsdel            &m_deldel
 //                 删前一个词        删后一个词
 //                 原为 LA(BSPC) / LA(DEL) = Mac 的 ⌥⌫ / ⌥⌦
@@ -37,8 +44,7 @@
 // -----------------------------------------------------------------------------
 
 // --- right hand --------------------------------------------------------------
-#define l_sym_RT &kp DLLR           &kp COLON           &kp UNDER            &kp HASH            &kp PRCNT
-//                 原 RA(N4)¢       $                LA(LS(N2))€       LA(N3)£           RA(Y)¥
+#define l_sym_RT &kp DLLR           &kp COLON           &kp UNDER            &kp EXCL            &kp QMARK
 //                 ¢ € £ ¥ 在 Windows 无原生键位。若需要，见文件末尾"待你决定"（Alt 码方案）。
 
 #define l_sym_RM &kp SEMI           &mt RSHFT EQUAL      &mt RGUI STAR       &mt RALT PLUS       &mt LCTRL MINUS
@@ -105,8 +111,11 @@
 #define l_nav_label "l_nav"
 
 #define l_nav_LT &m_close            &m_winclose           &m_save              &kp LS(TAB)           &m_find
-//                 原 RG(Q) 关窗   原 RG(W) 退出         原 LG(LS(N4)) 截图   原 LG(LS(LC(N4)))    原 RG(F) 查找
-//                 → Windows: Ctrl+W / Alt+F4 / Ctrl+S / Ctrl+Shift+Tab / Ctrl+F
+//   macOS 原映射: RG(Q)=⌘Q 退出 → 改 Alt+F4 (m_winclose，Windows 关当前窗口)
+//                 RG(W)=⌘W 关窗 → 改 Ctrl+W (m_close)
+//                 LG(LS(N4)) 截图 → Ctrl+S (m_save)；⚠️ 截图在 Windows 无纯键盘方案
+//                 LG(LS(LC(N4))) 区域截图 → Ctrl+Shift+Tab (上一个标签页)
+//                 RG(F) 查找 → Ctrl+F (m_find)
 //                 ⚠️ 原第 4 个是 Mac 的 ⌘⇧⌃4 区域截图，Windows 无对应；改成了 Ctrl+Shift+Tab（上一个标签页）
 
 #define l_nav_RT &m_docstart          &kp HOME              &kp UP              &kp PG_UP             &m_paraup
