@@ -27,7 +27,7 @@
 #define l_sym_LM &kp EXCL           &lk_bkt RBKT LBKT   &lk_par RPAR LPAR   &lk_brc RBRC LBRC   &kp SEMI
 //                 原 LA(N5)§       [                (                 {                 LA(N8)•
 
-#define l_sym_LB &kp LBKT           &kp AT              &kp RPAR            &kp RBKT            &kp QMARK
+#define l_sym_LB &kp AT           &kp RBKT              &kp RPAR            &kp RBRC            &kp QMARK
 //                 原 LA(LS(N8))°   ]                )                 }                 (原本是空位)
 
 #define l_sym_LH &m_bsdel            &m_deldel
@@ -37,13 +37,13 @@
 // -----------------------------------------------------------------------------
 
 // --- right hand --------------------------------------------------------------
-#define l_sym_RT &kp BSLH           &kp UNDER           &kp STAR            &kp HASH            &kp PRCNT
+#define l_sym_RT &kp DLLR           &kp COLON           &kp UNDER            &kp HASH            &kp PRCNT
 //                 原 RA(N4)¢       $                LA(LS(N2))€       LA(N3)£           RA(Y)¥
 //                 ¢ € £ ¥ 在 Windows 无原生键位。若需要，见文件末尾"待你决定"（Alt 码方案）。
 
-#define l_sym_RM &kp FSLH           &mt RSHFT EQUAL      &mt RGUI STAR       &mt RALT PLUS       &mt LCTRL MINUS
+#define l_sym_RM &kp SEMI           &mt RSHFT EQUAL      &mt RGUI STAR       &mt RALT PLUS       &mt LCTRL MINUS
 
-#define l_sym_RB &kp PLUS           &kp PIPE            &kp AMPS            &lk_ltgt GT LT      &kp GT
+#define l_sym_RB &kp CARET           &kp PIPE            &kp AMPS            &lk_ltgt GT LT      &kp GT
 
 #define l_sym_RH &none              &m_ctrlbslh
 //                 (原本空位)        原 LA(N1)¡ → ¡ 无原生键位；此位改为 Ctrl+\
