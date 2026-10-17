@@ -4,6 +4,8 @@
 
  */
 
+#define l_sym_label "l_sym-win"   // 层名（曾长期丢失，会导致 devicetree parse error）
+
 //                                       Symbol & math (Windows)
 //  * left paired symbols are "linger keys" via hold taps. Tap for left, hold for pair with insertion point between
 //  * CONVERTED FROM macOS (2026-10): 原版这一层是 Mac 的 Option 组合 (LA()/RA())，
