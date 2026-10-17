@@ -37,9 +37,8 @@
         };
 
 #define rst_btld reset_bootldr 0 0 // simple macro to keep the keymap uncluttered
-// 包装宏：&lk_* 声明的是 #binding-cells = <2>，补两个 0 就能像普通键一样只占一格
-#define lkQuote2  lk_quote2  0 0 // 双引号位（长按 "" ，Shift+长按 <>）
-#define lkSquote  lk_squote  0 0 // 单引号位（长按 ''）
+// 说明：&lk_* 声明的是 #binding-cells = <2>，补两个 0 就能像普通键一样只占一格。
+//       目前需要包装宏的只有 lk_ltgt（符号层 lower outR），它直接写在 layers_def.h 里。
          reset_bootldr: reset_bootldr { // tap for reset, hold for bootloader
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -176,14 +175,14 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             // 原本是 <&DqtLT>, <&kp BSLH> + Alt —— 三层（" / < / 反斜杠）。
-            // 现在去掉 Alt 层，只留 " 和 <；成对输入改由外层 lk_quote2 的长按负责。
+            // 现在去掉 Alt 层，只留 " 和 <。
             //
-            // 内层必须用 &kp DQT，不能用 &DqtLT：
-            //   DqtLT 内部调 &ak_DQT，而 DqtLbkt 现在被 hold-tap 当 tap 行为引用，
-            //   经 DqtLT 会形成循环引用。直接发 &kp DQT 即可断开。
-            //   代价：双引号位不再有“/ 后跟引号 -> ?”那条自适应规则。该规则触发键是
-            //   FSLH，只在“先打了 /”时才需要，而 / 只在基础层有 —— 无实际损失。
-            bindings = <&kp DQT>, <&kp LT>;
+            // ⚠️ 内层必须用 &DqtLT（而不是 &kp DQT）：
+            //   `?` 的连招是「先打 / 再打这个键」，靠的是 ak_DQT 这条自适应规则：
+            //     ak_DQT { bindings = <&kp DQT>; ak_CMMA_Q { trigger-keys = <FSLH>; ... }; };
+            //   而 ak_DQT 唯一的入口就是 DqtLT。直接发 &kp DQT 会绕过它，
+            //   导致 / 之后按这个键只出 " 而不是 ? （2026-10 实机踩过）。
+            bindings = <&DqtLT>, <&kp LT>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
         DqtGT: DqtGT { // ">
@@ -222,7 +221,7 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             // 原本是 <&SqtGT>, <&kp BSLH> + Alt —— 三层（' / > / 反斜杠）。
-            // 现在去掉 Alt 层，只留 ' 和 >；成对输入改由外层 lk_squote 的长按负责。
+            // 现在去掉 Alt 层，只留 ' 和 >。长按成对已取消（会干扰 `?` 连招）。
             bindings = <&kp SQT>, <&kp GT>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -304,29 +303,12 @@
             my_lk_config;
             bindings = <&t_ght>, <&t_Gh>;
         };
-        // 双引号键“长按”格专用：Shift 按住时出 <>，否则出 ""
-        pairDquoOrLtGt: pairDquoOrLtGt {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&pairDquo>, <&pairLtGt>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-        // ── 引号位：轻点引号 / Shift 尖括号 / 长按成对 ──────────────────
-        // hold-tap 的 cell 顺序是 <长按>, <轻点> —— 依据 ZMK 源码 behavior_hold_tap.c：
-        //   bindings[0] -> hold_behavior_dev，bindings[1] -> tap_behavior_dev
-        //   （对比 lk_th = <&t_tion>, <&t_Th>，注释写 "Th on tap, tion on linger"）。
-        // 用的时候必须走上面的 lkQuote2 / lkSquote 包装宏
-        // （&lk_* 声明的是 #binding-cells = <2>，得补两个参数）。
-        lk_squote: lk_squote { // 单引号：轻点 ' / Shift > / 长按 ''
-            my_lk_config;
-            bindings = <&pairSquo>, <&SqtRbkt>;
-        };
-        lk_quote2: lk_quote2 { // 双引号：轻点 " / Shift < / 长按 "" / Shift+长按 <>
-            my_lk_config;                       // #binding-cells = <2>：ZMK 的 hold-tap
-                                                // binding 硬性规定必须是 2，改 0 会被
-                                                // devicetree 拒绝。用 lkQuote2 包装宏调用。
-            bindings = <&pairDquoOrLtGt>, <&DqtLbkt>;
-        };
+        // ── 引号位：已取消长按成对 ──────────────────────────────────
+        // 2026-10 用户实测：引号键上的「长按」会和 `?` 的连招抢触发
+        // （`?` 靠「先打 / 再打引号键」，而长按判定会吃掉这次按键），
+        // 所以 pairDquoOrLtGt / lk_quote2 / lk_squote 三件套已移除。
+        // 基础层引号位现在是纯 mod-morph：DqtLbkt（" / <）与 SqtRbkt（' / >）。
+        // 需要成对引号请用符号层的 lk_brc 风格，或自行敲两次。
         lk_par: lk_par { // ( on tap, () on "linger"
             my_lk_config;
             bindings = <&pairPar>, <&kp>;
